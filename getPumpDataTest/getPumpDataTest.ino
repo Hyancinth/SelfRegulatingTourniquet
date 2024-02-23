@@ -1,8 +1,8 @@
 #include<Arduino.h>
 #include<Wire.h>
 
-int pin1 = 27;
-int pin2 = 19;
+int pin1 = 27; //OUT1 
+int pin2 = 19; //OUT2 (Doesn't seem to have an impact on the pump)
 
  
 uint8_t id = 0x18; // i2c address
@@ -20,12 +20,14 @@ double pmin = 0; // minimum value of pressure range [bar, psi, kPa, etc.]
 double percentage = 0; // holds percentage of full scale data
 
 char printBuffer[200], cBuff[20], percBuff[20], pBuff[20], tBuff[20];
- 
+
+unsigned long myTime; // time elapsed for each measurement
+
 void setup() {
 
-  pinMode(pin1, OUTPUT);
+  pinMode(pin1, OUTPUT); // set pins to output
   pinMode(pin2, OUTPUT);
-  digitalWrite(pin1, HIGH);
+  digitalWrite(pin1, HIGH); // set pin to high 
   
   Serial.begin(115200);
   while (!Serial) {
@@ -71,9 +73,11 @@ void loop() {
   pressure output, temperature
   */
 
-  sprintf(printBuffer, " % x\t % 2x % 2x % 2x\t % s\t % s\t % s\t % s \n", data[0], data[1], data[2],
+  myTime = millis();
+
+  sprintf(printBuffer, " % x\t % 2x % 2x % 2x\t % s\t % s\t % s\t % s\t % lu \n", data[0], data[1], data[2],
   data[3],
-  cBuff, percBuff, pBuff, tBuff);
+  cBuff, percBuff, pBuff, tBuff, myTime);
   Serial.print(printBuffer);
   delay(10);
 

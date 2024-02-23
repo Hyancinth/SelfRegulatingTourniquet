@@ -24,8 +24,8 @@ def processingLoop(csvfile):
 
             dataList = line.split() # splits data, interested in index 6
 
-            print(dataList) # sometimes there will be an index out of bounds error. uncomment this line if that occurs
-            csv_writer.writerow([dataList[4], dataList[5], dataList[6], dataList[7]]) # write data of interest to csv file
+            #print(dataList) # sometimes there will be an index out of bounds error. uncomment this line if that occurs
+            csv_writer.writerow([dataList[4], dataList[5], dataList[6], dataList[7], dataList[8]]) # write data of interest to csv file
             csvfile.flush() # write to file in real time (else it will read to the file after the script is interrupted)
 
     except KeyboardInterrupt:
@@ -35,5 +35,5 @@ def processingLoop(csvfile):
         print("Serial port closed.")
 
 # writing to csv file 
-with open('serialData1.csv', 'w', newline='') as file:
+with open('serialData2.csv', 'w', newline='') as file:
     processingLoop(file)

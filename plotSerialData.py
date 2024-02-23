@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("serialData1.csv") #open csv
+df = pd.read_csv("serialData2.csv") #open csv
 # serialData1 has some nice data with respect to pulses
 
 # print(df.to_string()) 
